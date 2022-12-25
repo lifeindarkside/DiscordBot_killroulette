@@ -8,7 +8,7 @@ client = discord.Client(intents=intents)
 prizes = {
     'Новогоднее украшение': 'Добавляет эмодзи в твой никнейм и выдаёт ачивку. Шанс 2%',
     'Лошара': 'Мьют на сервере и роль ЛОШАРА на время от 1 до 60 минут. Шанс 20%',
-    '| сосунок': 'Добавляет "| Сосунок" в твой никней и соответствующую роль на время от 1 до 60 минут. Шанс 78%',
+    '| сосунок': 'Добавляет "| Сосунок" в твой никней и дает соответствующую роль на время от 1 до 60 минут. Шанс 78%',
 }
 
 def display_help():
@@ -32,12 +32,11 @@ async def perform_action(prize, user, message):
         role = discord.utils.get(user.guild.roles, name='ГРУППА СОСУНКОВ')
         await user.add_roles(role)
         minutes = random.randint(1, 60)
-        await message.channel.send(f"{user.mention}, твой никнейм изменен на {minutes} минут.")
+        await message.channel.send(f"{user.mention}, твой никнейм изменен, роль выдана на {minutes} минут.")
         await user.edit(nick=user.name + " | сосунок")
         await asyncio.sleep(minutes * 60)
-        await user.edit(nick=user.name)
         await user.remove_roles(role)
-        await message.channel.send(f"{user.mention}, твой никнейм восстановлен.")
+        await message.channel.send(f"{user.mention}, роль ГРУППА СОСУНКОВ удалена у тебя.")
     elif prize['name'] == 'Новогоднее украшение':
         # Add a Christmas tree emoji or a gift to the user's nickname
         emojis = ['🎁', '🎄']
