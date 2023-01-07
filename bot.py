@@ -82,6 +82,13 @@ async def on_message(message):
     elif message.content.startswith('!рулеткахелп'):
         embed = discord.Embed(title='Хелп по боту', description=display_help())
         await message.channel.send(embed=embed)
+    elif message.content == '!создатьролинасервере':
+        # Create the roles
+        mute_role = await message.guild.create_role(name='ЛОШАРА')
+        lucky_role = await message.guild.create_role(name='Новогодний везунчик')
+        loser_role = await message.guild.create_role(name='ГРУППА СОСУНКОВ')
+
+        await message.channel.send('Роли "ЛОШАРА", "Новогодний везунчик" и "ГРУППА СОСУНКОВ" созданы на сервере. Выдайте роли "ЛОШАРА" мьют в текстовых каналах и выставьте ее выше тех ролей которые можно мьютить')
                  
 def read_token():
     with open("token.txt", "r") as f:
